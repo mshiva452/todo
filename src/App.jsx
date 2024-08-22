@@ -1,13 +1,11 @@
 import { useState } from "react";
 import "./App.css";
+import List from "./Components/Todo/List";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <p>{count}</p>
-      <button onClick={() => setCount((count) => count + 1)}>Counter</button>
+    <div style={{ background: "#565656", width: "100%", height: "100vh", padding: "0", margin: "0px" }}>
+      <List />
     </div>
   );
 }
