@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./App.css";
-import List from "./Components/Todo/List";
+import TaskList from "./Components/Todo/TaskList";
+import Sidebar from "./Components/Sidebar";
+import { Flex } from "antd";
 
 function App() {
   return (
-    <div style={{ background: "#565656", width: "100%", height: "100vh", padding: "0", margin: "0px" }}>
-      <List />
-    </div>
+    <Flex gap={20} style={{ background: "#000", height: "100vh", margin: "0px" }}>
+      <Sidebar />
+      <TaskList />
+    </Flex>
   );
 }
 
