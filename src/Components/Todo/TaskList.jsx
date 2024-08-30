@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+
 import ListItem from "./ListItem";
 import Form from "./Form";
 import { PlusOutlined } from "@ant-design/icons";
@@ -37,18 +37,7 @@ const TaskList = () => {
         </Flex>
         <ul className="card">
           {task?.map((item, index) => {
-            return (
-              <motion.div
-                key={index}
-                layout
-                initial={{ opacity: 0, x: -400, scale: 0.5 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 200, scale: 1.2 }}
-                transition={{ duration: 0.6, type: "spring" }}
-              >
-                <ListItem item={item} />
-              </motion.div>
-            );
+            return <ListItem item={item} key={index} />;
           })}
           {showModal && (
             <Modal onClose={handleModal} onCancel={handleModal} closable centered open={showModal} footer={<></>} title="Add Task">
