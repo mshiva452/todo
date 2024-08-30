@@ -32,7 +32,7 @@ const TaskList = () => {
       <Flex vertical style={{ width: "100%", background: "#333", padding: "10px 15px", borderRadius: "10px", margin: "10px 10px 10px 0px" }}>
         <Flex align="center" justify="space-between">
           <h2 style={{ margin: 0, color: "#fff" }}>All Tasks</h2>
-          <PlusOutlined onClick={handleModal} style={{ color: "#fff" }} />
+          <PlusOutlined onClick={handleModal} style={{ color: "#fff" }} spin />
         </Flex>
         <ul className="card">
           {task?.map((item, index) => {
