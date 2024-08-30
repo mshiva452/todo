@@ -8,7 +8,7 @@ function App() {
   return (
     <Flex gap={20} style={{ background: "#000", height: "100vh", margin: "0px" }}>
       <Sidebar />
-      <AnimatePresence>
+      <AnimatePresence mode="popLayout">
         <TaskList />
       </AnimatePresence>
     </Flex>

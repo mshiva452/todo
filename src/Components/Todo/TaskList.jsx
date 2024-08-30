@@ -36,7 +36,11 @@ const TaskList = () => {
         </Flex>
         <ul className="card">
           {task?.map((item, index) => {
-            return <ListItem item={item} key={index} />;
+            return (
+              <motion.div key={index}>
+                <ListItem item={item} />
+              </motion.div>
+            );
           })}
           {showModal && (
             <Modal onClose={handleModal} onCancel={handleModal} closable centered open={showModal} footer={<></>} title="Add Task">
