@@ -1,26 +1,70 @@
-import { Button, DatePicker, Flex, Input } from "antd";
-import React, { useRef, useState } from "react";
-
-const Form = ({ handleTask }) => {
+import { Button, DatePicker, Flex, Input, Select } from "antd";
+import React, { useState } from "react";
+import { observer } from "mobx-react";
+import taskStore from "../../stores/TaskStore";
+const Form = observer(() => {
   const { TextArea } = Input;
-  const taskRef = useRef(null);
-  const descRef = useRef(null);
-  const dateRef = useRef(null);
-  const handleSubmit = () => {
-    if (taskRef.current.value !== "") {
-      const id = self.crypto.randomUUID();
-      handleTask({ id: id, title: taskRef.current.value });
-      taskRef.current.value = "";
-    }
+  const id = self.crypto.randomUUID().toString();
+  const [task, setTask] = useState({
+    id: id,
+    title: null,
+    date: null,
+    description: null,
+    status: "Pending",
+  });
+  const saveTask = (e) => {
+    const id = self.crypto.randomUUID();
+    taskStore.setTask({
+      id: id,
+      ...task,
+    });
+    taskStore.toggleModal(false);
+  };
+  const handleChange = (e) => {
+    setTask({
+      ...task,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleDateChange = (date, dateString) => {
+    setTask({
+      ...task,
+      date: dateString,
+    });
+  };
+  const updateStatus = (status) => {
+    setTask({
+      ...task,
+      ["status"]: status,
+    });
   };
   return (
     <Flex vertical gap={5}>
-      <input type="text" placeholder="Task Name" ref={taskRef} />
-      {/*   <TextArea name="description" placeholder="Task Description" rows={5} ref={descRef} />
-      <DatePicker ref={dateRef} /> */}
-      <Button onClick={handleSubmit}>Save Task</Button>
+      <Input type="text" placeholder="Task Name" name="title" onChange={handleChange} />
+      <TextArea name="description" placeholder="Task Description" rows={5} onChange={handleChange} />
+      <DatePicker onChange={handleDateChange} showTime />
+      <Select
+        name="status"
+        onChange={updateStatus}
+        defaultValue="Pending"
+        options={[
+          {
+            label: "Pending",
+            value: "Pending",
+          },
+          {
+            label: "Completed",
+            value: "Completed",
+          },
+          {
+            label: "Archive",
+            value: "Archive",
+          },
+        ]}
+      ></Select>
+      <Button onClick={saveTask}>Save Task</Button>
     </Flex>
   );
-};
+});
 
 export default Form;
